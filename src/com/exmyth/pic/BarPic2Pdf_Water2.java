@@ -7,7 +7,7 @@
  * Note:Just limited to use by wopuwulian Technology Co.,Ltd. Others are forbidden. 
  * Created on: 2015年10月15日下午4:59:00
  */
-package com.wpwl.pic;
+package com.exmyth.pic;
 
 import java.io.BufferedReader;
 import java.io.File;

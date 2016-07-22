@@ -7,7 +7,7 @@
  * Note:Just limited to use by wopuwulian Technology Co.,Ltd. Others are forbidden. 
  * Created on: 2015年10月15日下午4:59:00
  */
-package com.wpwl.pic;
+package com.exmyth.pic;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,10 +23,10 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @version ：1.0 Version
  * description:
  * create time：2015年10月15日 
- * 目前在生产的标签，老的，带条码
+ * 该程序是29*36，上面空白二维码下面条码的程序
  *
  */
-public class Pic2Pdf_bar {
+public class Pic2Pdf2 {
 
 	/**
 	 * @authoer：jason
@@ -48,17 +48,17 @@ public class Pic2Pdf_bar {
 			String picNum  = args[2];
 			
 			float left = 35.9f;
-			float top = 743f;
+			float top = 737f;
 			float widthStep = 119;
-			float heightStep = 105;
-			int pageSize = 40;
+			float heightStep = 117.5f;
+			int pageSize = 35;
 			int rowSize = 5;
 			float step = 116.75f;
 			float vStep = 101.85f;
 			
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             if (classLoader == null) {
-                classLoader = Pic2Pdf_bar.class.getClassLoader();
+                classLoader = Pic2Pdf2.class.getClassLoader();
             }
             InputStream fileStream = null;
             fileStream = classLoader.getResourceAsStream("04.jpg");
@@ -89,10 +89,11 @@ public class Pic2Pdf_bar {
 				Rectangle rect = new Rectangle(609,842);
 //				Document document = new Document();
 				Document document = new Document(rect);
+				//PdfWriter.getInstance(document, new FileOutputStream( pdfPath + "\\" + k + ".pdf"));
 				PdfWriter.getInstance(document, new FileOutputStream( pdfPath + "\\" + String.format("%06d", k) + ".pdf"));
 				document.open();
 				//document.add(img);
-				for(int i = 1; i <= 8 ; i++) {
+				for(int i = 1; i <= 7 ; i++) {
 					for(int j = 1; j <=5 ; j++) {
 						Image png = Image.getInstance(picPath+"\\"+ ((k-1)*pageSize+(i-1)*rowSize + j) + ".png");
 						float leftPos,toPos;
@@ -172,26 +173,26 @@ public class Pic2Pdf_bar {
 						}
 						*/
 						if( j == 1 ) {
-							leftPos = left + 1.5f;//12.356f;
+							leftPos = left + 1.61f;
 						}
 						
 						if( j == 2) {
-							leftPos = left + step + 0.87f; //
+							leftPos = left + step + 1.05f;
 						}
 						if( j == 3 ) {
 							leftPos = left + step * 2 + 0.8f ;
 						}
 						
 						if( j == 4) {
-							leftPos = left + step * 3 +0.2f;
+							leftPos = left + step * 3;
 						}
 						if( j == 5 ) {
-							leftPos = left + step * 4 - 0.5f;
+							leftPos = left + step * 4 - 0.8f;
 						}
 						png.setAbsolutePosition(leftPos,toPos);
 //						png.scalePercent(45.5f);
 						png.scalePercent(46.05f);
-						document.add(png);
+						//document.add(png);
 						
 						//底下增加条码
 						Image barPng = Image.getInstance(picPath+"\\"+ ((k-1)*pageSize+(i-1)*rowSize + j) + "_bar.png");
@@ -199,49 +200,49 @@ public class Pic2Pdf_bar {
 						barLeft = 0.0f;
 						barTop = 0.0f;
 						if( i == 1) {
-							barTop = top - heightStep*(i-1)+4.8f - 25f+ 7f;
+							barTop = top - heightStep*(i-1)+4.8f - 25f+ 4.6f;
 						}
 						if( i == 2) {
-							barTop = top - heightStep*(i-1)+8.3f - 25f+ 7f;
+							barTop = top - heightStep*(i-1)+8.3f - 25f+ 3.4f;
 						}	
 						if( i == 3) {
-							barTop = top - heightStep*(i-1)+12.3f - 26f+ 7f;
+							barTop = top - heightStep*(i-1)+12.3f - 26f+ 3.2f;
 						}						
 //						png.setAbsolutePosition(left + step * (j-1), top - step*(i-1));
 						if( i == 4 ) {
-							barTop = top - heightStep*(i-1)+15.95f - 27f+ 7f;
+							barTop = top - heightStep*(i-1)+15.95f - 27f+ 3.2f;
 //							png.setAbsolutePosition(left + step * (j-1), top - step*(i-1)-1);
 						}
 						if( i == 5 ) {
-							barTop = top - heightStep*(i-1)+20f - 28f+ 7f;
+							barTop = top - heightStep*(i-1)+20f - 28f+ 3.2f;
 //							png.setAbsolutePosition(left + step * (j-1), top - step*(i-1)-1);
 						}	
 						if( i == 6 ) {
-							barTop = top - heightStep*(i-1)+23.65f - 28.5f+ 7f;
+							barTop = top - heightStep*(i-1)+23.65f - 28.5f+ 2.9f;
 //							png.setAbsolutePosition(left + step * (j-1), top - step*(i-1)-2);
 						}
 						if( i == 7 ) {
-							barTop = top - heightStep*(i-1)+28 - 30f+ 7f;
+							barTop = top - heightStep*(i-1)+28 - 30f+ 2.7f;
 //							png.setAbsolutePosition(left + step * (j-1), top - step*(i-1)-2);
 						}	
 						if( i == 8 ) {
-							barTop = top - heightStep*(i-1)+30.1f - 29f+ 7f;
+							barTop = top - heightStep*(i-1)+30.1f - 29f+ 3.3f;
 //							png.setAbsolutePosition(left + step * (j-1), top - step*(i-1)-2);
 						} 
 						if( j == 1 ) {
-							barLeft = left + (j-1) * widthStep-5.5f ; 
+							barLeft = left + (j-1) * widthStep-3f +1f ; 
 						}
 						if( j == 2 ) {
-							barLeft = left + (j-1) * widthStep-1.9f -6.1f; 
+							barLeft = left + (j-1) * widthStep-1.9f -4f +1f ; 
 						}
 						if( j == 3 ) {
-							barLeft = left + (j-1) * widthStep+2.2f -13.1f;   
+							barLeft = left + (j-1) * widthStep+2.2f -11f +1f ;   
 						}
 						if( j == 4 ) {
-							barLeft = left + (j-1) * widthStep+5.7f -18.1f; 
+							barLeft = left + (j-1) * widthStep+5.7f -17.4f +1f ; 
 						}
 						if( j == 5 ) {
-							barLeft = left + (j-1) * widthStep+10.5f -27.1f; 
+							barLeft = left + (j-1) * widthStep+10.5f -24.4f +1f ; 
 						}						
 //						if( j == 1 ) {
 //							barLeft = left + (j-1) * widthStep-15.5f; 
@@ -260,7 +261,9 @@ public class Pic2Pdf_bar {
 //						}
 						barPng.setAbsolutePosition(barLeft,barTop);
 //						png.scalePercent(45.5f);
-						barPng.scalePercent(84f,55);
+//						barPng.scalePercent(51f,100);
+//						barPng.scalePercent(55.5f,100);
+						barPng.scalePercent(75.5f,100);
 						document.add(barPng);	
 					}
 				}

@@ -1,4 +1,4 @@
-package com.wpwl.pic;
+package com.exmyth.pic;
 
 public class StringUtil {
 	public static String format(String str, int length, Long num) {

@@ -7,7 +7,7 @@
  * Note:Just limited to use by wopuwulian Technology Co.,Ltd. Others are forbidden. 
  * Created on: 2015年10月15日下午4:59:00
  */
-package com.wpwl.pic;
+package com.exmyth.pic;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,7 +29,7 @@ import com.itextpdf.text.pdf.PdfWriter;
  * 抗菌水圆形标签(图片生成pdf)
  *
  */
-public class BarPic2Pdf_Water3 {
+public class BarPic2Pdf_Water {
 
 	/**
 	 * @authoer：jason
@@ -42,7 +42,7 @@ public class BarPic2Pdf_Water3 {
 		try {
 			if( args.length <3) {
 				System.out.println("使用方式: 命令  图片目录  PDF目录  图片总数");
-				System.out.println("举例: BarPic2Pdf d:\\PicWater3 d:\\DdfWater3 30");
+				System.out.println("举例: BarPic2Pdf d:\\PicWater d:\\DdfWater 30");
 				return;
 			}
 			
@@ -86,24 +86,15 @@ public class BarPic2Pdf_Water3 {
 //				BaseFont bf = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H",BaseFont.NOT_EMBEDDED);
 				serialText.setFontAndSize(bf, 8);
 				serialText.beginText();
-				
-				float absoluteX = 0.0f;
 				for(int i = 1; i <= rowSize; i++) {
 					for(int j = 1; j <=colSize; j++) {
 						if(((k-1)*pageSize+(i-1)*colSize + j)>Integer.parseInt(picNum)){
 							break;
 						}
-						int index = (k-1)*pageSize+(i-1)*colSize + j;
-						
-						Image png1 = Image.getInstance(picPath+"\\"+ index + "_1_bar.png");
-						Image png2 = Image.getInstance(picPath+"\\"+ index + "_2_bar.png");
-						
-						int mod = index % 36;
-						
-						float leftPos = 0.0f;
-						float toPos = 0.0f;
-						float scale = 62.5f;
-						
+						Image png = Image.getInstance(picPath+"\\"+ ((k-1)*pageSize+(i-1)*colSize + j) + "_bar.png");
+						float leftPos,toPos;
+						leftPos = 0.0f;
+						toPos = 0.0f;
 						//--------------------行图标top调整(第三个开始需要调整偏差)-----------------------
 						if( i == 1) {
 							toPos = top;
@@ -139,23 +130,9 @@ public class BarPic2Pdf_Water3 {
 						if( j == 5 ) {
 							leftPos = left + step * 4 + 0.4f;
 						}
-						
-						/*
-						if(mod<10){
-							absoluteX = leftPos;
-						}
-						else{
-							absoluteX = leftPos-4;
-						}
-						*/
-						
-						png1.setAbsolutePosition(leftPos,toPos+80);//leftPos越大,越靠上;toPos越小,越靠左
-						png1.scalePercent(scale);
-						document.add(png1);
-						
-						png2.setAbsolutePosition(leftPos,toPos);//leftPos越大,越靠上;toPos越小,越靠左
-						png2.scalePercent(scale);
-						document.add(png2);
+						png.setAbsolutePosition(leftPos,toPos);//leftPos越大,越靠上;toPos越小,越靠左
+						png.scalePercent(62.5f);
+						document.add(png);
 						serialText.showTextAligned(PdfContentByte.ALIGN_CENTER, br.readLine(),leftPos + 20, toPos-20 , 0);
 					}
 				}

@@ -7,7 +7,7 @@
  * Note:Just limited to use by wopuwulian Technology Co.,Ltd. Others are forbidden. 
  * Created on: 2015年10月15日下午4:59:00
  */
-package com.wpwl.pic;
+package com.exmyth.pic;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,10 +23,10 @@ import com.itextpdf.text.pdf.PdfWriter;
  * @version ：1.0 Version
  * description:
  * create time：2015年10月15日 
- *
+ * 目前在生产的标签，老的，带条码
  *
  */
-public class Pic2Pdf {
+public class Pic2Pdf_bar {
 
 	/**
 	 * @authoer：jason
@@ -48,7 +48,7 @@ public class Pic2Pdf {
 			String picNum  = args[2];
 			
 			float left = 35.9f;
-			float top = 737f;
+			float top = 743f;
 			float widthStep = 119;
 			float heightStep = 105;
 			int pageSize = 40;
@@ -58,7 +58,7 @@ public class Pic2Pdf {
 			
 			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             if (classLoader == null) {
-                classLoader = Pic2Pdf.class.getClassLoader();
+                classLoader = Pic2Pdf_bar.class.getClassLoader();
             }
             InputStream fileStream = null;
             fileStream = classLoader.getResourceAsStream("04.jpg");
@@ -89,7 +89,7 @@ public class Pic2Pdf {
 				Rectangle rect = new Rectangle(609,842);
 //				Document document = new Document();
 				Document document = new Document(rect);
-				PdfWriter.getInstance(document, new FileOutputStream( pdfPath + "\\" + k + ".pdf"));
+				PdfWriter.getInstance(document, new FileOutputStream( pdfPath + "\\" + String.format("%06d", k) + ".pdf"));
 				document.open();
 				//document.add(img);
 				for(int i = 1; i <= 8 ; i++) {
@@ -172,11 +172,11 @@ public class Pic2Pdf {
 						}
 						*/
 						if( j == 1 ) {
-							leftPos = left + 1.5f;
+							leftPos = left + 1.5f;//12.356f;
 						}
 						
 						if( j == 2) {
-							leftPos = left + step + 0.87f;
+							leftPos = left + step + 0.87f; //
 						}
 						if( j == 3 ) {
 							leftPos = left + step * 2 + 0.8f ;
@@ -261,7 +261,7 @@ public class Pic2Pdf {
 						barPng.setAbsolutePosition(barLeft,barTop);
 //						png.scalePercent(45.5f);
 						barPng.scalePercent(84f,55);
-//						document.add(barPng);	
+						document.add(barPng);	
 					}
 				}
 				//一页PDF完成，保存文件
